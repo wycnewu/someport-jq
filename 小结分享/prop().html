@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        span{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<input type="checkbox" name="abc">
+<input type="checkbox" id="3"  checked="checked">
+<span id="1">全选</span>
+<span id="2">重置</span>
+<select name="select" id="select">
+    <option value="1">一</option>
+    <option value="2">二</option>
+    <option value="3" id="s" selected>三</option>
+</select>
+<script src="./jquery.js"></script>
+<script>
+    //通过prop()改变状态；
+//    $("#1").on('click', function () {
+//        $("input").prop("checked", true)
+//        console.dir($('input'));
+//    });
+//    $("#2").on('click', function () {
+//        $("input").prop("checked", false)
+//    })
+console.dir($('#3'));
+//点击input框，输出该input的详细信息；
+$('input').on('change',function(e){
+    console.dir($(this))
+});
+//通过attr()改变checked状态；
+$("#1").on('click', function () {
+    $("input").attr("checked", true);
+    console.log($(':checked'))
+});
+$("#2").on('click', function () {
+    $("input").attr("checked", false);
+    $("input").prop("checked", false);
+});
+
+//$('[value=1]').attr('selected',true);//当标签中有了 ‘selected="selected"’属性的时候，再用attr()设置就无效了；
+//$('[value=1]').prop('selected',true);//即使标签中有了 ‘selected="selected"’属性的时候，再用prop()设置依然有效了；
+  //  $('[value=1]')[0]['selected']=true;
+//console.dir(document.getElementsByTagName('option'));
+//console.log($('[value=2]')[0].getAttribute);
+</script>
+</body>
+</html>

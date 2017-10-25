@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arr = [0,0,0,0,0,0];
+    (function () {
+        'use strict';
+        var arr = [1,1,1,1,1,1];
+        var _eval = eval;
+        window.eval('arr[0] = 123;');
+//        eval.call(null, 'arr[1] = 123;');
+//        _eval('arr[2] = 123;');
+//        (0,eval)('arr[3] = 123;');
+    })();
+    console.log(arr);
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div class='div' data-a='1'></div>
+
+<script src="jquery.js"></script>
+<script>
+    var div = $('.div');
+    //一、attr()与data()取值类型
+    //    console.log(typeof div.attr('data-a'));//string
+    //    console.log(typeof div.data('a'));//number
+    //    div.data('a', '2');
+    //    console.log(typeof div.data('a'));//string
+    //    div.data('a', {a:3});
+    //    console.log(typeof div.data('a'));//object
+    //二、data()的增删改查发生在内存的一个对象中；
+    console.log(div.data('a'));//取一次a，cache={a:1}就被建立了
+    div.removeAttr('data-a');
+    console.log(div.data('a'))//还能从cache中取到a的值；
+    div.removeData('a');
+    console.log(div.data('a'))//undefined；
+    //三、通过dataset[key]=xxx改变data-xxx的值；
+    //    console.log( div[0].dataset.a);//string
+    //    console.log( div.data('a'));//number
+    //    div.data('a',2);
+    //    div[0].dataset.a=10;
+    //    console.log( div.data('a'));
+    //    console.log( div[0].dataset.a);
+    //    console.log( div.attr('data-a'));
+
+</script>
+</body>
+</html>

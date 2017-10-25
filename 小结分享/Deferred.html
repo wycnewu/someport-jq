@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery.js"></script>
+<script>
+    //写法一：定义全局变dfd,容易被改变状态；
+    var dfd = $.Deferred();
+    var wait = function () {
+        var tasks = function () {
+            alert('执行完毕');
+            this.a=10;
+            dfd.resolve(2);
+        };
+        setTimeout(tasks, 1000);
+        return dfd;
+    };
+    $.when(wait()).done(function (n1) {
+        alert(n1);
+        alert('成功了');
+    }).fail(function () {
+        alert('失败了');
+    });
+
+    //    dfd.resolve();
+
+    //写法二：通过promise()改变deferred对象为promise对象；promise对象无法从外界改变其状态；
+//    var wait = function (dfd) {
+//        var dfd = $.Deferred();
+//        var tasks = function () {
+//                alert('执行完毕');
+//                dfd.resolve(2);
+//            };
+//            setTimeout(tasks, 3000);
+//            return dfd.promise();
+//        };
+//        var d = wait();
+//        $.when(d).done(function (n) {
+//            alert(n);
+//            alert('成功了');
+//        }).fail(function () {
+//            alert('失败了');
+//        });
+//    如果不用promise对象，就可以从外面改变dfd的状态了；
+//        d.resolve(4);
+
+    //写法三：$.Deferred()可以接受一个函数名作为参数，并且$.Deferred生成的对象会作为实参传给这个函数；
+    //    var wait = function (dfd) {
+    //        var tasks = function () {
+    //            alert('执行完毕');
+    //            dfd.resolve(2);
+    //        };
+    //        setTimeout(tasks, 1000);
+    //        return dfd.promise();
+    //    };
+    //    var again = function (dfd) {
+    //        var tasks = function () {
+    //            alert('again over');
+    //            dfd.resolve(3);
+    //        };
+    //        setTimeout(tasks, 2000);
+    //        return dfd.promise();
+    //    };
+    //    $.Deferred(wait,again).done(function (n) {
+    //        alert(n);
+    //        alert('成功了');
+    //    }).fail(function () {
+    //        alert('失败了')
+    //    })
+
+    //写法四：
+//        var dtd = $.Deferred(); // 生成Deferred对象
+//        var wait = function(){
+//            var tasks = function(){
+//                alert("执行完毕！");
+//                dtd.resolve(); // 改变Deferred对象的执行状态
+//            };
+//            setTimeout(tasks,2000);
+//        };
+//
+//        dtd.promise(wait);//具体做了啥？待商量
+//        console.dir(wait);
+//        wait.done(function(){ alert("哈哈，成功了！"); })
+//            .fail(function(){ alert("出错啦！"); });
+//        wait(dtd);
+
+    //除了done和fail,还有then(),always();
+    //then(successFunc,failFunc)传两个函数，前面是成功的回调，后面是失败的回调，如果只传一个，则表示成功的回调；
+    //always(function(){})不管成功还是失败都会走always()方法；
+
+    //五、监听两个Deferred对象，只有都成功了才走done();
+    //    var wait = function () {
+    //        var dfd = $.Deferred();
+    //        var tasks = function () {
+    //            alert('执行完毕');
+    //            dfd.resolve(2);
+    //        };
+    //        setTimeout(tasks, 1000);
+    //        return dfd.promise();
+    //    };
+    //    var again = function () {
+    //        var dfd = $.Deferred();
+    //        var tasks = function () {
+    //            alert('again over');
+    //            dfd.resolve(3);
+    //        };
+    //        setTimeout(tasks, 2000);
+    //        return dfd.promise();
+    //    };
+    //    $.when(wait(),again()).done(function (n1,n2) {
+    //        alert(n1);
+    //        alert(n2);
+    //        alert('成功了');
+    //    }).fail(function () {
+    //        alert('失败了');
+    //    });
+
+//    六、监听两个Deferred对象，有一个失败了就走fail();
+//        var wait = function () {
+//            var dfd = $.Deferred();
+//            var tasks = function () {
+//                alert('执行完毕');
+//                dfd.reject(2);
+//            };
+//            setTimeout(tasks, 1000);
+//            return dfd.promise();
+//        };
+//        var again = function () {
+//            var dfd = $.Deferred();
+//            var tasks = function () {
+//                alert('again over');
+//                dfd.reject(3);
+//            };
+//            setTimeout(tasks, 2000);
+//            return dfd.promise();
+//        };
+//        $.when(wait(),again()).done(function () {
+//            alert('成功了');
+//        }).fail(function (n1,n2) {
+//            alert(n1);
+//            alert(n2);
+//            alert('失败了');
+//        });
+</script>
+</body>
+</html>

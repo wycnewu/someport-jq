@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div {
+            width: 300px;
+            margin: 10px auto;
+            border: 1px solid lime;
+        }
+
+        .box {
+            margin: 50px;
+            width: 200px;
+            height: 160px;
+            border: 2px dashed lightcoral;
+        }
+
+        .p {
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            background: lightblue;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="div">div
+    <div class="box">box
+        <div class="p" id="p">p</div>
+    </div>
+</div>
+<div class="p">p1</div>
+<div class="p">p2</div>
+<script src="jquery.js"></script>
+<script>
+    function a() {
+        console.log("a");
+    }
+    function b() {
+        console.log("b");
+    }
+    function c(e) {
+        console.log("c");
+//        e.stopPropagation();
+        e.stopImmediatePropagation();
+    }
+
+    $('.p').delegate('.p', 'click', function (e) {
+        console.log(1)
+    });
+
+    $('.div').on('click', a);
+
+    $('.div').delegate('.box', 'click', b);
+
+    $('.p').on('click', false);//相当于return false 即阻止冒泡，又阻止默认事件；
+
+    $('.p').on('click', c);// 即阻止冒泡，又阻止剩余事件处理函数的执行；
+
+    $('.p').on('click', function () {
+        console.log('ok')
+    });
+//    var p = document.getElementById('p');
+//    var events = $._data(p, 'events');
+//    console.dir($('.p'));
+//    console.log(events);
+    //    $('.p').off('click',c);
+
+    //    $('.div').off('click');
+</script>
+</body>
+</html>

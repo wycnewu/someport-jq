@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a = 1;
+    if (1) {
+        console.log(a);
+        let a = 2;//死亡提升，把a提升到一个dead zone（暂时性死区）
+    }
+    //    for(let i=0;i<3;i++){
+    //        setTimeout(function () {
+    //            alert(i)
+    //        },500)
+    //    }
+    //for循环每次都产生一个块级作用域；用var声明的变量不识别这个块级作用域，所以，用var声明的变量是全局变量，在每一次循环中用的都是同一个变量；而let声明的变量能识别块级作用域，所以在每一次执行循环体的时候都会重新定义一次变量，而每次声明的变量所赋的值是javascript引擎记录的上一次循环结束后相对应变量（i）的值；
+//    setTimeout(function () {
+//        alert(a)
+//    });
+//    var a=10;
+//    var a =12;作用域内存在的变量，var不会再次定义；
+</script>
+</body>
+</html>
